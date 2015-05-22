@@ -83,6 +83,8 @@ var YourCtrl = function($scope, localStorageService, ...) {
   localStorageService.set('localStorageKey','Add this!');
   // Read that value back
   var value = localStorageService.get('localStorageKey');
+  // Read that value back, with default value
+  var value = localStorageService.get('localStorageKey','This is a new key and I am the default value');
   // To remove a local storage
   localStorageService.remove('localStorageKey');
   // Removes all local storage
@@ -117,9 +119,9 @@ var YourCtrl = function($scope, localStorageService, ...) {
       </tr>
       <tr>
         <td><code>get</code></td>
-        <td><small>key</small></td>
+        <td><small>key, default_val (optional)</small></td>
         <td>Gets a value from local storage</td>
-        <td>Stored value</td>
+        <td>Stored value, if not default_val</td>
       </tr>
       <tr>
         <td><code>remove</code></td>

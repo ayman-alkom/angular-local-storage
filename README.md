@@ -182,6 +182,11 @@ myApp.controller('MainCtrl', function($scope, localStorageService) {
   function getItem(key) {
    return localStorageService.get(key);
   }
+  //And you can pass an optional default value.
+  function getItem(key, , default_val) {
+   return localStorageService.get(key, default_val);
+  }
+
   //...
 });
 ```

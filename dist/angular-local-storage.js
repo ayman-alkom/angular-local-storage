@@ -1,6 +1,6 @@
 /**
  * An Angular module that gives you access to the browsers local storage
- * @version v0.2.1 - 2015-05-18
+ * @version v0.2.1 - 2015-05-22
  * @link https://github.com/grevory/angular-local-storage
  * @author grevory <greg@gregpike.ca>
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -162,9 +162,10 @@ angularLocalStorage.provider('localStorageService', function() {
       return true;
     };
 
-    // Directly get a value from local storage
+    // Directly get a value from local storage ( if not exist default value is available )
     // Example use: localStorageService.get('library'); // returns 'angular'
-    var getFromLocalStorage = function (key) {
+    // Example use: localStorageService.get('new_key','default_val'); // returns 'default_val'
+    var getFromLocalStorage = function (key, defaultValue) {
 
       if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
         if (!browserSupportsLocalStorage) {
@@ -178,7 +179,13 @@ angularLocalStorage.provider('localStorageService', function() {
       // angular.toJson will convert null to 'null', so a proper conversion is needed
       // FIXME not a perfect solution, since a valid 'null' string can't be stored
       if (!item || item === 'null') {
-        return null;
+        if (isUndefined(defaultValue)) {
+          return null;
+        } else {
+					// Set the default value for this key
+          addToLocalStorage(key, defaultValue);
+          return defaultValue;
+        }
       }
 
       return JSON.parse(item);

@@ -4,10 +4,10 @@ describe('localStorageService', function() {
   var elmSpy;
 
   //Actions
-  function getItem(key) {
+  function getItem(key, default_val) {
     return function($window, localStorageService) {
       elmSpy = spyOn($window.localStorage, 'getItem').andCallThrough();
-      localStorageService.get(key);
+      localStorageService.get(key, default_val);
     };
   }
 
